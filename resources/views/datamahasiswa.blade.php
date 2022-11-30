@@ -14,6 +14,7 @@
     <h1>Data Mahasiswa</h1>
 
     <div class="container">
+      
     <a href="/tambahmahasiswa" class="btn btn-success">Tambah +</a>
         <div class="row">
           @if ($message = Session::get('success'))

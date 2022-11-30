@@ -19,13 +19,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa');
 
-Route::get('/tambahmahasiswa', [MahasiswaController::class, 'tambahmahasiswa'])->name('tambahmahasiswa');
-Route::post('/insertdata', [MahasiswaController::class, 'insertdata'])->name('insertdata');
+    Route::get('/tambahmahasiswa', [MahasiswaController::class, 'tambahmahasiswa'])->name('tambahmahasiswa');
+    Route::post('/insertdata', [MahasiswaController::class, 'insertdata'])->name('insertdata');
+    
+    Route::get('/tampilkandata/{id}', [MahasiswaController::class, 'tampilkandata'])->name('tampilkandata');
+    Route::post('/updatedata/{id}', [MahasiswaController::class, 'updatedata'])->name('updatedata');
+    
+    
+    Route::get('/delete/{id}', [MahasiswaController::class, 'delete'])->name('delete');
+    
+});
 
-Route::get('/tampilkandata/{id}', [MahasiswaController::class, 'tampilkandata'])->name('tampilkandata');
-Route::post('/updatedata/{id}', [MahasiswaController::class, 'updatedata'])->name('updatedata');
+Auth::routes();
 
-
-Route::get('/delete/{id}', [MahasiswaController::class, 'delete'])->name('delete');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
